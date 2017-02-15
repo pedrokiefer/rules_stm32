@@ -73,4 +73,5 @@ filegroup(
         "stm32f4xx_ll_sdmmc.c",
         "stm32f4xx_ll_usb.c",
     ],
+    visibility=["//visibility:public"],
 )

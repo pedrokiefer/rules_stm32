@@ -27,5 +27,6 @@ cc_library(
         "stm32f4xx.h",
         "system_stm32f4xx.h",
     ],
+    includes = ["."],
     visibility = ["//visibility:public"],
 )

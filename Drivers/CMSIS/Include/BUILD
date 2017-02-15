@@ -18,6 +18,7 @@ cc_library(
         "core_sc000.h",
         "core_sc300.h",
     ],
+    includes = ["."],
     visibility = ["//visibility:public"],
 )
 

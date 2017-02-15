@@ -73,4 +73,6 @@ cc_library(
         "stm32f4xx_ll_sdmmc.h",
         "stm32f4xx_ll_usb.h",
     ],
+    includes = ["."],
+    visibility=["//visibility:public"]
 )
