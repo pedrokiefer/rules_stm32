@@ -5,7 +5,7 @@ SUPPORTED_PROCESSORS = [
 def arm_none_repository():
     native.new_http_archive(
         name = "com_arm_developer_toolchain_gcc_6_2",
-        build_file = "compilers/arm_none_gcc_6.2.BUILD",
+        build_file = "//compilers:arm_none_gcc_6.2.BUILD",
         strip_prefix = "gcc-arm-none-eabi-6_2-2016q4",
         url = "https://developer.arm.com/-/media/Files/downloads/gnu-rm/6-2016q4/gcc-arm-none-eabi-6_2-2016q4-20161216-linux.tar.bz2"
     )
