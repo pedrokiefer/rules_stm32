@@ -4,7 +4,7 @@
 
 ## Usage
 
-On `WORKSPACE` add this:
+On `WORKSPACE` add this for linux:
 
 ```
 git_repository(
@@ -18,6 +18,33 @@ arm_none_repository()
 ``` 
 ## Available Rules
 
+### Processors
+
+Supported processors:
+* STM32F401xC
+* STM32F401xE
+* STM32F405xx
+* STM32F407xx
+* STM32F410Cx
+* STM32F410Rx
+* STM32F410Tx
+* STM32F411xE
+* STM32F412Cx
+* STM32F412Rx
+* STM32F412Vx
+* STM32F412Zx
+* STM32F413xx
+* STM32F415xx
+* STM32F417xx
+* STM32F423xx
+* STM32F427xx
+* STM32F429xx
+* STM32F437xx
+* STM32F439xx
+* STM32F446xx
+* STM32F469xx
+* STM32F479xx
+
 ### arm_none_repository ###
 
 Fetchs arm toolchain
@@ -25,8 +52,10 @@ Fetchs arm toolchain
 ```
 load("@stm32//stm32f4:rules.bzl", "arm_none_repository")
 
-arm_none_repository()
+arm_none_repository(arch)
 ```
+
+* arch: linux, mac, windows [Unimplemented]
 
 Run bazel build with `--crosstool_top=@stm32//tools/arm_compiler:toolchain --cpu=armeabi-v7a` for building with this toolchain.
 

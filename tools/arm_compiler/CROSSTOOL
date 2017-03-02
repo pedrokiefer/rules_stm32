@@ -12,6 +12,11 @@ default_toolchain {
   toolchain_identifier: "local"
 }
 
+default_toolchain {
+  cpu: "darwin"
+  toolchain_identifier: "local"
+}
+
 toolchain {
   abi_version: "gcc"
   abi_libc_version: "glibc_2.19"

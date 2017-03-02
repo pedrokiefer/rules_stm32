@@ -1,5 +1,27 @@
 SUPPORTED_PROCESSORS = [
+    "STM32F401xC",
+    "STM32F401xE",
+    "STM32F405xx",
+    "STM32F407xx",
+    "STM32F410Cx",
+    "STM32F410Rx",
+    "STM32F410Tx",
+    "STM32F411xE",
+    "STM32F412Cx",
+    "STM32F412Rx",
+    "STM32F412Vx",
+    "STM32F412Zx",
+    "STM32F413xx",
+    "STM32F415xx",
+    "STM32F417xx",
+    "STM32F423xx",
+    "STM32F427xx",
     "STM32F429xx",
+    "STM32F437xx",
+    "STM32F439xx",
+    "STM32F446xx",
+    "STM32F469xx",
+    "STM32F479xx",
 ]
 
 HAL_SOURCES = [
@@ -76,13 +98,21 @@ HAL_SOURCES = [
         "stm32f4xx_ll_usb.c",
 ]
 
-def arm_none_repository():
-    native.new_http_archive(
-        name = "com_arm_developer_toolchain_gcc_6_2",
-        build_file = str(Label("//compilers:arm_none_gcc_6.2.BUILD")),
-        strip_prefix = "gcc-arm-none-eabi-6_2-2016q4",
-        url = "https://developer.arm.com/-/media/Files/downloads/gnu-rm/6-2016q4/gcc-arm-none-eabi-6_2-2016q4-20161216-linux.tar.bz2"
-    )
+def arm_none_repository(arch="linux"):
+    if arch == "linux":
+        native.new_http_archive(
+            name = "com_arm_developer_toolchain_gcc_6_2",
+            build_file = str(Label("//compilers:arm_none_gcc_6.2.BUILD")),
+            strip_prefix = "gcc-arm-none-eabi-6_2-2016q4",
+            url = "https://developer.arm.com/-/media/Files/downloads/gnu-rm/6-2016q4/gcc-arm-none-eabi-6_2-2016q4-20161216-linux.tar.bz2"
+        )
+    if arch == "mac":
+        native.new_http_archive(
+            name = "com_arm_developer_toolchain_gcc_6_2",
+            build_file = str(Label("//compilers:arm_none_gcc_6.2.BUILD")),
+            strip_prefix = "gcc-arm-none-eabi-6_2-2016q4",
+            url = "https://developer.arm.com/-/media/Files/downloads/gnu-rm/6-2016q4/gcc-arm-none-eabi-6_2-2016q4-20161216-mac.tar.bz2"
+        )
 
 def stm32f4_binary(name, srcs = [], deps = [], processor = "STM32F429xx", use_hal=False, hal_config_hdrs = [],linker_script="", **kwargs):
     my_copts = [ "-D" + processor ]
