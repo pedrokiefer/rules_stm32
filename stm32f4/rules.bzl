@@ -67,6 +67,10 @@ HAL_MODULES = {
         "stm32f4xx_hal_gpio.c",
     ],
 
+    'HAL_HASH_SOURCES': [
+        "stm32f4xx_hal_hash.c",
+        "stm32f4xx_hal_hash_ex.c",
+    ],
 
 
     'HAL_PDC_SOURCES': [
@@ -128,8 +132,7 @@ HAL_MODULES = {
 #     "stm32f4xx_hal_fmpi2c.c",
 #     "stm32f4xx_hal_fmpi2c_ex.c",
 #     
-#     "stm32f4xx_hal_hash.c",
-#     "stm32f4xx_hal_hash_ex.c",
+
 #     "stm32f4xx_hal_hcd.c",
 #     "stm32f4xx_hal_i2c.c",
 #     "stm32f4xx_hal_i2c_ex.c",
@@ -189,8 +192,9 @@ def arm_none_repository(arch="linux"):
         native.new_http_archive(
             name = "com_arm_developer_toolchain_gcc_6_2",
             build_file = str(Label("//compilers:arm_none_gcc_6.2.BUILD")),
-            strip_prefix = "gcc-arm-none-eabi-6_2-2016q4",
-            url = "https://developer.arm.com/-/media/Files/downloads/gnu-rm/6-2016q4/gcc-arm-none-eabi-6_2-2016q4-20161216-linux.tar.bz2"
+            strip_prefix = "gcc-arm-none-eabi-6-2017-q1-update",
+            url = "https://developer.arm.com/-/media/Files/downloads/gnu-rm/6_1-2017q1/gcc-arm-none-eabi-6-2017-q1-update-linux.tar.bz2"
+            #url = "https://developer.arm.com/-/media/Files/downloads/gnu-rm/6-2016q4/gcc-arm-none-eabi-6_2-2016q4-20161216-linux.tar.bz2"
         )
     if arch == "mac":
         native.new_http_archive(
@@ -201,7 +205,7 @@ def arm_none_repository(arch="linux"):
         )
 
 def stm32f4_hal_library(name, hdrs=[], modules=[], processor="STM32F407xx"):
-    my_copts = [ "-D" + processor ]
+    my_copts = [ "-IInc/", "-D" + processor ]
     hal_deps = []
     suffix = name.lower()
     hal_deps.append(str(Label("//Drivers/STM32F4xx_HAL_Driver/Inc:hal_headers")))
@@ -209,7 +213,7 @@ def stm32f4_hal_library(name, hdrs=[], modules=[], processor="STM32F407xx"):
     native.cc_library(
         name = "hal_config_" + suffix,
         hdrs = hdrs,
-        includes = [ "Inc/" ]
+        copts = [ "-IInc/" ]
     )
 
     native.genrule(
@@ -243,7 +247,8 @@ def stm32f4_hal_library(name, hdrs=[], modules=[], processor="STM32F407xx"):
         srcs = [str(Label("//Drivers/STM32F4xx_HAL_Driver/Src:hal_srcs"))],
         outs = ["stm32/hal/%s" % src for src in hal_sources],
         cmd = "cp $(locations %s) $$(dirname $(location %s))" % (str(Label("//Drivers/STM32F4xx_HAL_Driver/Src:hal_srcs")), "stm32/hal/stm32f4xx_hal.c")
-     )
+    )
+
     native.cc_library(
         name = suffix,
         srcs = [":hal_" + suffix + "_srcs"],
@@ -253,7 +258,7 @@ def stm32f4_hal_library(name, hdrs=[], modules=[], processor="STM32F407xx"):
 
 
 def stm32f4_binary(name, srcs = [], deps = [], processor = "STM32F429xx", use_hal=False,linker_script="", **kwargs):
-    my_copts = [ "-D" + processor ]
+    my_copts = [ "-D" + processor , "-IInc"]
     hal_deps = []
     suffix = name.lower()
     if (use_hal):
