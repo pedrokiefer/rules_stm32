@@ -71,8 +71,12 @@ Run bazel build with `--crosstool_top=@stm32//tools/arm_compiler:toolchain --cpu
 
 ### raw_binary ###
 Generates a .bin file
+
 ```
+load("@stm32//tools/arm_compiler:raw_binary.bzl", "raw_binary")
+
 raw_binary(
     name = "my_bin",
     src = ":binary"
 )
+```
