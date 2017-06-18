@@ -59,6 +59,13 @@ arm_none_repository(arch)
 
 Run bazel build with `--crosstool_top=@stm32//tools/arm_compiler:toolchain --cpu=armeabi-v7a` for building with this toolchain.
 
+### stm32f4_hal_library ###
+
+```
+load("@stm32//stm32f4:rules.bzl", "stm32f4_hal_library")
+stm32f4_hal_library()
+```
+
 ### stm32f4_binary ###
 
 * name: binary_name
