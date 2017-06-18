@@ -80,3 +80,16 @@ raw_binary(
     src = ":binary"
 )
 ```
+
+### hex_binary ###
+Generates a .hex file
+
+```
+load("@stm32//tools/arm_compiler:raw_binary.bzl", "hex_binary")
+
+hex_binary(
+    name = "my_hex",
+    src = ":binary"
+)
+```
+
