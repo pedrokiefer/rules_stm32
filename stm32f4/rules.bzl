@@ -269,7 +269,7 @@ def stm32f4_binary(name, srcs = [], deps = [], processor = "STM32F429xx", use_ha
         srcs = srcs,
         deps = [linker_script] + deps,
         copts = my_copts,
-        linkopts = ["-T " + linker_script],
+        linkopts = ["-T " + linker_script, "-lc", "-lm", "-lnosys"],
         linkstatic = 1,
     )
 

@@ -51,6 +51,7 @@ filegroup(
         "//tools/arm_compiler/arm_none_gcc:ar",
         "//tools/arm_compiler/arm_none_gcc:gcc",
         "//tools/arm_compiler/arm_none_gcc:ld",
+        "//tools/arm_compiler/arm_none_gcc:objcopy", 
         "@com_arm_developer_toolchain_gcc_6_2//:compiler_pieces",
     ],
 )
