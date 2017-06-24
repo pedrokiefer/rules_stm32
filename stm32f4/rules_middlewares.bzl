@@ -47,8 +47,8 @@ def _strip_path_filename(path):
   return path[last_pkg:]
 
 
-def stm32_usb_device_library(name, srcs=[], hdrs=[], deps=[], usb_class=None, processor="STM32F407xx", **kwargs):
-    my_copts = [ "-IInc/", "-D" + processor ]
+def stm32_usb_device_library(name, srcs=[], hdrs=[], deps=[], usb_class=None, processor="STM32F407xx", include_path="Inc", **kwargs):
+    my_copts = [ "-I" + include_path, "-D" + processor ]
 
     usb_srcs = []
     usb_srcs.extend(USB_DEVICE_CORE_SOURCES)

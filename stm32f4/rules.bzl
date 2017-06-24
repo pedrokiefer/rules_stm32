@@ -204,8 +204,8 @@ def arm_none_repository(arch="linux"):
             url = "https://developer.arm.com/-/media/Files/downloads/gnu-rm/6-2016q4/gcc-arm-none-eabi-6_2-2016q4-20161216-mac.tar.bz2"
         )
 
-def stm32f4_hal_library(name, hdrs=[], modules=[], processor="STM32F407xx"):
-    my_copts = [ "-IInc/", "-D" + processor ]
+def stm32f4_hal_library(name, hdrs=[], modules=[], processor="STM32F407xx", include_path="Inc"):
+    my_copts = [ "-I" + include_path, "-D" + processor ]
     hal_deps = []
     suffix = name.lower()
     hal_deps.append(str(Label("//Drivers/STM32F4xx_HAL_Driver/Inc:hal_headers")))
@@ -257,8 +257,8 @@ def stm32f4_hal_library(name, hdrs=[], modules=[], processor="STM32F407xx"):
     )
 
 
-def stm32f4_binary(name, srcs = [], deps = [], processor = "STM32F429xx", use_hal=False,linker_script="", **kwargs):
-    my_copts = [ "-D" + processor , "-IInc"]
+def stm32f4_binary(name, srcs = [], deps = [], processor = "STM32F429xx", include_path="Inc", use_hal=False,linker_script="", **kwargs):
+    my_copts = [ "-D" + processor , "-I" + include_path]
     hal_deps = []
     suffix = name.lower()
     if (use_hal):
