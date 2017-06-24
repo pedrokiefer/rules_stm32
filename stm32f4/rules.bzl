@@ -264,12 +264,16 @@ def stm32f4_binary(name, srcs = [], deps = [], processor = "STM32F429xx", includ
     if (use_hal):
         my_copts.append("-DUSE_HAL_DRIVERS")
 
+    linker_path = ""
+    if PACKAGE_NAME:
+        linker_path = PACKAGE_NAME + "/"
+
     native.cc_binary(
         name = name,
         srcs = srcs,
         deps = [linker_script] + deps,
         copts = my_copts,
-        linkopts = ["-T " + linker_script, "-lc", "-lm", "-lnosys"],
+        linkopts = ["-T " + linker_path + linker_script, "-lc", "-lm", "-lnosys"],
         linkstatic = 1,
     )
 

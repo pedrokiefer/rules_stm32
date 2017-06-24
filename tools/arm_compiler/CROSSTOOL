@@ -76,7 +76,7 @@ toolchain {
   linker_flag: "-mfloat-abi=hard" 
   linker_flag: "-mfpu=fpv4-sp-d16"
   linker_flag: "-specs=nano.specs"
-  linker_flag: "-specs=nosys.specs"
+  #linker_flag: "-specs=nosys.specs"
 
   #linker_flag: "-Lexternal/com_arm_developer_toolchain_gcc_6_2/arm-none-eabi/lib/hard/"
   #linker_flag: "-Lexternal/com_arm_developer_toolchain_gcc_6_2/arm-none-eabi/lib/thumb/"
@@ -117,7 +117,7 @@ toolchain {
   #compiler_flag: "-fno-omit-frame-pointer"
 
   #compiler_flag: "-D__weak=\"__attribute__((weak))\"" 
-  #compiler_flag: "-D__packed=\"__attribute__((__packed__))\""
+  compiler_flag: "-D__packed=\"__attribute__((__packed__))\""
 
   # Stamp the binary with a unique identifier.
   linker_flag: "-Wl,--gc-sections"
